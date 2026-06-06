@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="rps_background">#FFFFFF</color>
+    <color name="rps_surface">#FFFFFF</color>
+    <color name="rps_surface_selected">#EFF6FF</color>
+    <color name="rps_border">#E5E7EB</color>
+    <color name="rps_border_subtle">#F1F5F9</color>
+    <color name="rps_switch_track_checked">#BFDBFE</color>
+    <color name="rps_text_primary">#18181B</color>
+    <color name="rps_text_muted">#64748B</color>
+    <color name="rps_result_win">#2563EB</color>
+    <color name="rps_result_lose">#EF4444</color>
+    <color name="rps_result_draw">#F59E0B</color>
+    <color name="rps_button_disabled">#E5E7EB</color>
+    <color name="rps_button_disabled_text">#9CA3AF</color>
+    <color name="rps_button_text">#FFFFFF</color>
+</resources>

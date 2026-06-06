@@ -1,0 +1,11 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme._0127RPS" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/rps_result_win</item>
+        <item name="colorAccent">@color/rps_result_win</item>
+        <item name="colorControlActivated">@color/rps_result_win</item>
+        <item name="android:windowBackground">@color/rps_background</item>
+    </style>
+
+    <style name="Theme._0127RPS" parent="Base.Theme._0127RPS" />
+</resources>

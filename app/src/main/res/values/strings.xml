@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">0127RPS</string>
+    <string name="settings">設定</string>
+    <string name="open_settings">設定を開く</string>
+    <string name="dark_mode">ダークモード</string>
+    <string name="reset_record">記録リセット</string>
+    <string name="reset_record_confirmation">最高記録を0連勝に戻しますか？</string>
+    <string name="cancel">キャンセル</string>
+    <string name="reset">リセット</string>
+    <string name="select_hand_prompt">手を選んでね</string>
+    <string name="start">勝負！</string>
+    <string name="next">次の戦い</string>
+    <string name="cpu">CPUの手</string>
+    <string name="hand_rock">グー</string>
+    <string name="hand_scissors">チョキ</string>
+    <string name="hand_paper">パー</string>
+    <string name="default_message">何連勝できるかな？</string>
+    <string name="countdown_jan">じゃん</string>
+    <string name="countdown_ken">けん</string>
+    <string name="countdown_pon">ぽん！</string>
+    <string name="lose">あなたの負け</string>
+    <string name="lose_close">惜しい！</string>
+    <string name="draw">引き分け</string>
+    <string name="draw_again">もう一回！</string>
+    <string name="format_win_standard">あなたの勝ち！ %d連勝中</string>
+    <string name="format_win_read">読み勝ち！ %d連勝中</string>
+    <string name="format_best_streak">最高記録：%d連勝</string>
+    <string name="format_best_streak_new">最高記録：%d連勝  NEW!</string>
+    <string name="format_best_streak_default">最高記録：0連勝</string>
+    <string name="streak_title_beginner">初心者</string>
+    <string name="streak_title_master">じゃんけん名人</string>
+    <string name="streak_title_god_hand">神の手</string>
+</resources>
