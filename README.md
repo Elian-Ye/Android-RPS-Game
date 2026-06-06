@@ -1,4 +1,4 @@
-# 0127RPS
+# RPS Streak
 
 ## Screenshots
 
@@ -10,7 +10,7 @@
 
 ## English
 
-0127RPS is a simple Android Rock Paper Scissors game.
+RPS Streak is a simple Android Rock Paper Scissors game.
 
 The app focuses on a clean UI and a smooth game rhythm. Players choose a hand, start the match, watch the "jan-ken-pon" countdown, and then see the CPU hand and result.
 
@@ -39,7 +39,7 @@ Open the project in Android Studio and run the app on an emulator or Android dev
 
 ## 日本語
 
-0127RPS は、Android 向けのシンプルなじゃんけんゲームです。
+RPS Streak は、Android 向けのシンプルなじゃんけんゲームです。
 
 きれいで見やすい UI と、テンポの良いゲーム体験を意識して作りました。手を選んで「勝負！」を押すと、「じゃん・けん・ぽん！」のカウントダウン後に CPU の手と結果が表示されます。
 
@@ -68,7 +68,7 @@ Android Studio でプロジェクトを開き、エミュレーターまたは A
 
 ## 繁體中文
 
-0127RPS 是一個簡單的 Android 剪刀石頭布遊戲。
+RPS Streak 是一個簡單的 Android 剪刀石頭布遊戲。
 
 這個專案重點放在簡潔的 UI 和順暢的遊戲節奏。玩家選擇手勢後按下「勝負！」，畫面會依序顯示「じゃん・けん・ぽん！」倒數，接著揭曉 CPU 出手與勝負結果。
 

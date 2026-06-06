@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">0127RPS</string>
+    <string name="app_name">RPS Streak</string>
     <string name="settings">設定</string>
     <string name="open_settings">設定を開く</string>
     <string name="dark_mode">ダークモード</string>
