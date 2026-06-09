@@ -62,7 +62,6 @@
             android:layout_marginTop="12dp"
             android:gravity="center"
             android:includeFontPadding="false"
-            android:text="@string/format_best_streak_default"
             android:textColor="@color/rps_text_muted"
             android:textSize="13sp"
             tools:text="最高記録：5連勝" />

@@ -10,6 +10,7 @@ final class RpsAnimations {
 
     private AnimatorSet resultAnimator;
 
+    // Restores the result text before showing a new countdown or result.
     void resetResult(TextView resultView) {
         // Clear any previous result animation before reusing the same TextView.
         cancelResult();
@@ -19,12 +20,14 @@ final class RpsAnimations {
         resultView.setTranslationX(0f);
     }
 
+    // Plays a short scale pulse for a winning result.
     void animateWin(TextView resultView) {
         ObjectAnimator scaleX = ObjectAnimator.ofFloat(resultView, "scaleX", 1f, 1.16f, 1f);
         ObjectAnimator scaleY = ObjectAnimator.ofFloat(resultView, "scaleY", 1f, 1.16f, 1f);
         playTogether(360, scaleX, scaleY);
     }
 
+    // Plays a small horizontal shake for a losing result.
     void animateLose(TextView resultView) {
         ObjectAnimator shake = ObjectAnimator.ofFloat(
                 resultView,
@@ -39,6 +42,7 @@ final class RpsAnimations {
         playTogether(360, shake);
     }
 
+    // Flashes the result text for a draw.
     void animateDraw(TextView resultView) {
         ObjectAnimator flash = ObjectAnimator.ofFloat(
                 resultView,
@@ -52,6 +56,7 @@ final class RpsAnimations {
         playTogether(460, flash);
     }
 
+    // Gives the selected hand a quick tap feedback animation.
     void animateSelectedHand(ImageView hand) {
         hand.animate().cancel();
         hand.animate()
@@ -66,12 +71,14 @@ final class RpsAnimations {
                 .start();
     }
 
+    // Cancels hand feedback and restores the image scale.
     void resetHandScale(ImageView hand) {
         hand.animate().cancel();
         hand.setScaleX(1f);
         hand.setScaleY(1f);
     }
 
+    // Stops the current result animation if one is active.
     void cancelResult() {
         if (resultAnimator != null) {
             resultAnimator.cancel();
@@ -79,6 +86,7 @@ final class RpsAnimations {
         }
     }
 
+    // Runs one or more result animations together with shared cleanup.
     private void playTogether(long durationMs, ObjectAnimator... animators) {
         // Only one result animation should be active at a time.
         cancelResult();

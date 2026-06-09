@@ -28,6 +28,20 @@
         app:thumbTint="@color/rps_switch_thumb"
         app:trackTint="@color/rps_switch_track" />
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnLanguage"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="?attr/selectableItemBackground"
+        android:gravity="start|center_vertical"
+        android:minWidth="0dp"
+        android:minHeight="0dp"
+        android:paddingHorizontal="0dp"
+        android:text="@string/language"
+        android:textAllCaps="false"
+        android:textColor="@color/rps_text_primary"
+        android:textSize="13sp" />
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"

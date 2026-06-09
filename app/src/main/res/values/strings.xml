@@ -3,6 +3,14 @@
     <string name="settings">設定</string>
     <string name="open_settings">設定を開く</string>
     <string name="dark_mode">ダークモード</string>
+    <string name="language">言語</string>
+    <string name="format_language">言語：%s</string>
+    <string name="language_japanese">日本語</string>
+    <string name="language_english">English</string>
+    <string name="language_traditional_chinese">繁體中文</string>
+    <string name="change_language">言語を変更</string>
+    <string name="format_change_language_confirmation">言語を%sに切り替えますか？</string>
+    <string name="apply">適用</string>
     <string name="reset_record">記録リセット</string>
     <string name="reset_record_confirmation">最高記録を0連勝に戻しますか？</string>
     <string name="cancel">キャンセル</string>
@@ -26,7 +34,6 @@
     <string name="format_win_read">読み勝ち！ %d連勝中</string>
     <string name="format_best_streak">最高記録：%d連勝</string>
     <string name="format_best_streak_new">最高記録：%d連勝  NEW!</string>
-    <string name="format_best_streak_default">最高記録：0連勝</string>
     <string name="streak_title_beginner">初心者</string>
     <string name="streak_title_master">じゃんけん名人</string>
     <string name="streak_title_god_hand">神の手</string>

@@ -22,6 +22,8 @@ import androidx.core.view.WindowInsetsCompat;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
+    private static final String STATE_WIN_COUNT = "win_count";
+
     // A small state machine keeps repeated taps from starting overlapping rounds.
     private enum GameState {
         CHOOSING,
@@ -79,15 +81,17 @@ public class MainActivity extends AppCompatActivity {
     private View cpuResult;
     private ImageView imgCpu;
 
+    // Initializes the screen, saved settings, game data, and click handlers.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // Apply the saved theme before inflating views to avoid a visible theme flash.
+        super.onCreate(savedInstanceState);
+        // Apply saved visual settings before inflating views to avoid visible flashes.
+        RpsSettingsMenu.applySavedLanguage(this);
         RpsSettingsMenu.applySavedTheme(this);
 
-        super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
-        soundPlayer = new RpsSoundPlayer();
+        soundPlayer = new RpsSoundPlayer(this);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -116,6 +120,9 @@ public class MainActivity extends AppCompatActivity {
         };
 
         bestWinCount = RpsPreferences.getBestWinCount(this);
+        if (savedInstanceState != null) {
+            winCount = savedInstanceState.getInt(STATE_WIN_COUNT, 0);
+        }
         updateBestStreakView();
 
         View.OnClickListener itemSelectListener = new View.OnClickListener() {
@@ -158,8 +165,10 @@ public class MainActivity extends AppCompatActivity {
         });
 
         resetGameView();
+        restoreCurrentStreakView();
     }
 
+    // Clears the saved best streak and updates the best record label.
     private void resetBestRecord() {
         cancelBestRecordAnimation();
         bestWinCount = 0;
@@ -167,6 +176,7 @@ public class MainActivity extends AppCompatActivity {
         updateBestStreakView();
     }
 
+    // Releases pending animations, countdown tasks, and sound resources.
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -178,6 +188,14 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    // Saves the current streak when Android recreates this Activity.
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putInt(STATE_WIN_COUNT, winCount);
+        super.onSaveInstanceState(outState);
+    }
+
+    // Handles the player's hand selection before a round starts.
     private void selectItem(View selectedView) {
         if (gameState != GameState.CHOOSING && gameState != GameState.READY) {
             return;
@@ -202,6 +220,7 @@ public class MainActivity extends AppCompatActivity {
         btnNext.setEnabled(false);
     }
 
+    // Resets the screen to the initial hand-selection state.
     private void resetGameView() {
         gameState = GameState.CHOOSING;
         selectedItem = -1;
@@ -224,6 +243,14 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    // Restores the streak title after an Activity recreation.
+    private void restoreCurrentStreakView() {
+        if (winCount > 0) {
+            showStreakInfo();
+        }
+    }
+
+    // Locks the chosen hand and prepares the UI for countdown.
     private void prepareRound() {
         cancelCountdown();
         animations.resetResult(txtInfo);
@@ -243,10 +270,12 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    // Starts the janken countdown from the first step.
     private void startCountdown(int cpu) {
         showCountdownStep(cpu, 0);
     }
 
+    // Shows one countdown step, then schedules the next one.
     private void showCountdownStep(int cpu, int step) {
         if (gameState != GameState.PLAYING) {
             return;
@@ -273,6 +302,7 @@ public class MainActivity extends AppCompatActivity {
         handler.postDelayed(countdownRunnable, COUNTDOWN_STEP_MS);
     }
 
+    // Reveals the CPU hand before showing the round result.
     private void showRoundResult(int cpu) {
         if (gameState != GameState.PLAYING) {
             return;
@@ -298,6 +328,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    // Cancels any countdown callback waiting in the main thread queue.
     private void cancelCountdown() {
         if (countdownRunnable != null) {
             handler.removeCallbacks(countdownRunnable);
@@ -305,6 +336,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    // Judges the round and updates result text, streaks, sounds, and animations.
     private void judgeJanken(int cpu) {
         animations.resetResult(txtInfo);
         RpsGameRules.Result result = RpsGameRules.judge(selectedItem, cpu);
@@ -332,10 +364,12 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    // Picks one message resource from a small result-message list.
     private int getRandomMessage(int[] messages) {
         return messages[random.nextInt(messages.length)];
     }
 
+    // Saves a new best streak only when the current streak beats the old record.
     private void updateBestWinCount() {
         int updatedBestWinCount = RpsGameRules.nextBestWinCount(bestWinCount, winCount);
         if (updatedBestWinCount == bestWinCount) {
@@ -347,12 +381,14 @@ public class MainActivity extends AppCompatActivity {
         showNewBestRecord();
     }
 
+    // Displays the normal best streak label.
     private void updateBestStreakView() {
         txtBestStreak.setText(getString(R.string.format_best_streak, bestWinCount));
         txtBestStreak.setTextColor(getColor(R.color.rps_text_muted));
         txtBestStreak.setAlpha(1f);
     }
 
+    // Shows a short NEW! flash when the best streak is updated.
     private void showNewBestRecord() {
         cancelBestRecordAnimation();
         txtBestStreak.setText(getString(R.string.format_best_streak_new, bestWinCount));
@@ -388,6 +424,7 @@ public class MainActivity extends AppCompatActivity {
         animation.start();
     }
 
+    // Safely stops the best-record flash animation.
     private void cancelBestRecordAnimation() {
         if (bestRecordAnimator == null) {
             return;
@@ -398,6 +435,7 @@ public class MainActivity extends AppCompatActivity {
         animation.cancel();
     }
 
+    // Displays the streak title that matches the current win count.
     private void showStreakInfo() {
         if (winCount >= 5) {
             txtStreakTitle.setText(getString(R.string.streak_title_god_hand));
@@ -410,10 +448,12 @@ public class MainActivity extends AppCompatActivity {
         txtStreakTitle.setVisibility(View.VISIBLE);
     }
 
+    // Hides the streak title when the streak is not active.
     private void hideStreakInfo() {
         txtStreakTitle.setVisibility(View.GONE);
     }
 
+    // Animates the CPU result block into view, then runs the next step.
     private void showCpuResult(Runnable onRevealComplete) {
         cpuResult.animate().setListener(null);
         cpuResult.animate().cancel();
@@ -435,6 +475,7 @@ public class MainActivity extends AppCompatActivity {
                 .start();
     }
 
+    // Hides and resets the CPU result block for the next round.
     private void hideCpuResult() {
         cpuResult.animate().setListener(null);
         cpuResult.animate().cancel();
@@ -443,6 +484,7 @@ public class MainActivity extends AppCompatActivity {
         resetCpuResultStartPosition();
     }
 
+    // Moves the CPU result block above the player's hands after layout inflation.
     private void configureCpuResultPosition() {
         // Place the CPU result above the player's hands without complicating the XML layout.
         contentArea.removeView(cpuResult);
@@ -455,12 +497,14 @@ public class MainActivity extends AppCompatActivity {
         cpuResult.setLayoutParams(params);
     }
 
+    // Places the CPU result block offscreen so it can slide in from the left.
     private void resetCpuResultStartPosition() {
         float offset = dpToPx(CPU_RESULT_START_OFFSET_DP);
         cpuResult.setTranslationX(-offset);
         cpuResult.setTranslationY(0f);
     }
 
+    // Converts density-independent pixels to actual screen pixels.
     private float dpToPx(float dp) {
         return dp * getResources().getDisplayMetrics().density;
     }

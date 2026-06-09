@@ -8,6 +8,7 @@ final class RpsPreferences {
     // Keep preference keys in one place so UI code does not depend on raw strings.
     private static final String KEY_BEST_WIN_COUNT = "best_win_count";
     private static final String KEY_DARK_MODE = "dark_mode";
+    private static final String KEY_LANGUAGE_TAG = "language_tag";
 
     private RpsPreferences() {
     }
@@ -30,6 +31,20 @@ final class RpsPreferences {
 
     static void setDarkModeEnabled(Context context, boolean enabled) {
         preferences(context).edit().putBoolean(KEY_DARK_MODE, enabled).apply();
+    }
+
+    static RpsLanguage getLanguage(Context context) {
+        String languageTag = preferences(context)
+                .getString(KEY_LANGUAGE_TAG, null);
+        if (languageTag == null) {
+            return RpsLanguage.getSystemDefault(context);
+        }
+
+        return RpsLanguage.fromLanguageTag(languageTag);
+    }
+
+    static void setLanguage(Context context, RpsLanguage language) {
+        preferences(context).edit().putString(KEY_LANGUAGE_TAG, language.getLanguageTag()).apply();
     }
 
     private static SharedPreferences preferences(Context context) {
