@@ -33,6 +33,19 @@ The app focuses on a clean UI, quick feedback, and a smooth game rhythm. Players
 - Audio: SoundPool
 - Build Tool: Gradle
 
+### Project Structure
+
+- `MainActivity.java` - Controls the main game flow, screen state, countdown, result reveal, and UI updates.
+- `RpsGameRules.java` - Handles Rock Paper Scissors rules, current streak updates, and best record calculation.
+- `RpsAnimations.java` - Handles result animations and selected-hand feedback.
+- `RpsSoundPlayer.java` - Loads and plays short sound effects with SoundPool.
+- `RpsPreferences.java` - Saves the best record, dark mode setting, and selected language.
+- `RpsLanguage.java` - Defines supported languages and default language behavior.
+- `RpsSettingsMenu.java` - Controls the settings popup, language menu, theme switch, and reset confirmation.
+- `res/layout/` - Contains the main screen and settings popup layouts.
+- `res/values*/strings.xml` - Contains Japanese, English, and Traditional Chinese text resources.
+- `res/raw/` - Contains short sound effect files.
+
 ### How to Run
 
 Open the project in Android Studio and run the app on an emulator or Android device.
