@@ -4,6 +4,10 @@
 
 Download the latest APK here: [RPS Streak APK](https://drive.google.com/file/d/1ouJBrq2sj38G4vTJuX8zX8IfQJ6Cm1n0/view?usp=share_link)
 
+Google Drive may show a warning because this APK is an executable file and is not distributed through Google Play.
+
+This app is a personal Android study project.
+
 ## Screenshots
 
 <p align="center">
