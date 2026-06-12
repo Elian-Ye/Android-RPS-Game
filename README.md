@@ -1,5 +1,9 @@
 # RPS Streak
 
+## Try the App
+
+Download the latest APK here: [RPS Streak APK](https://drive.google.com/file/d/1ouJBrq2sj38G4vTJuX8zX8IfQJ6Cm1n0/view?usp=share_link)
+
 ## Screenshots
 
 <p align="center">
